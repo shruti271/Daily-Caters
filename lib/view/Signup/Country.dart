@@ -8,12 +8,13 @@ class CityDropDownBar extends StatefulWidget {
 
 class _CityDropDownBarState extends State<CityDropDownBar> {   
   
-    final  List<String> _locations = ['Australia','Canada', 'New Zealand'];
+    final  List<String> _locations = ['Australia','Canada'];
       List<String> _curstate =[];
      String? selectedLocation;
      String? selecetedstate;
     final  List<String> _ausstate = ['NSW', 'ACT', 'WA', 'NT', 'SA', 'QLD', 'VIC', 'TAS'];   
     final  List<String> _canadastate = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon'];  
+    // ignore: unused_field
     final  List<String> _nzstate = ['Northland', 'Auckland', 'Waikato', 'Bay of Plenty', 'Gisborne', 'Hawke\'s Bay', 'Taranaki', 'Manawatu-Whanhanui', 'Wellington', 'Tasman', 'Nelson', 'Marlborough', 'West Coast', 'Canterbury', 'Otago', 'Southland'];
   @override
   Widget build(BuildContext context) {
@@ -83,11 +84,12 @@ class _CityDropDownBarState extends State<CityDropDownBar> {
                       // setState(() {
                         _curstate =_canadastate;//_canadasate
                       // });
-                    }else if(newValue == 'New Zealand'){
-                      // setState(() {
-                        _curstate =_nzstate;//_canadasate
-                      // });
                     }
+                    // else if(newValue == 'New Zealand'){
+                    //   // setState(() {
+                    //     _curstate =_nzstate;//_canadasate
+                    //   // });
+                    // }
                   });
                 },
                 items: _locations.map((location) {

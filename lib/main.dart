@@ -1,6 +1,6 @@
 //import 'package:daily_caters/view/SignIn.dart';
 import 'package:daily_caters/view/Signup/Country.dart';
-import 'package:daily_caters/view/Signup/SignUp.dart';
+// import 'package:daily_caters/view/Signup/SignUp.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
