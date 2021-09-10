@@ -1,52 +1,47 @@
-//import 'package:daily_caters/view/SignIn.dart';
-import 'package:daily_caters/view/Signup/Country.dart';
-// import 'package:daily_caters/view/Signup/SignUp.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:daily_caters/constants/firebase.dart';
+import 'package:daily_caters/controller/signup/auth_controller.dart';
+import 'package:daily_caters/view/Home/body.dart';
+import 'package:daily_caters/view/SignIn/SignIn.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async{
-  //await Firebase.initializeApp();
+Future<void> main() async {
+  //await Firebase.initializeApp();  
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
+    await initialization.then((value){
+    // Get.put(AppController());
+    Get.put(AuthController());
+  });
 
-
-// class MyAppSplash extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Splash Screen',
-//       theme: ThemeData(
-//         primarySwatch: Colors.green,
-//       ),
-//       home: MyApp(),
-//       debugShowCheckedModeBanner: false,
-//     );
-//   }
-//}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+ await SharedPreferences.getInstance().then((value){
+   var user;
+   user = value.getString('UID_daily_caters');
   
+  if(user!=null){
+     final AuthController _authController = Get.find();
+     _authController.initializeUserModel(user);
+  }   
+     runApp(MyApp(cuser:user));
+   });
+  
+  
+}
+
+class MyApp extends StatelessWidget {
+  // const MyApp({ Key? key }) : super(key: key);
+  final AuthController authController = Get.find();
+  final cuser;
+  MyApp({this.cuser});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: Scaffold(
-          
-          // appBar: AppBar(
-          //   title: Text('Daily Caters'),
-          //   backgroundColor: Color(0xff076800),
-          // ),
-        body: CityDropDownBar(),
-        
-      ),
+        child:(cuser !=null )?
+              HomeScreen():
+             SigninPage(),          
       ),
     );
   }
