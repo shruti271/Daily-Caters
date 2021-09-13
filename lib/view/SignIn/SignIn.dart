@@ -3,6 +3,8 @@ import 'package:daily_caters/view/Signup/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'ResertPassword.dart';
+
 class SigninPage extends StatelessWidget {
   // const SigninPage({Key? key}) : super(key: key);
   final AuthController _authController = Get.find();
@@ -45,8 +47,9 @@ class SigninPage extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  _authController
-                      .sendpasswordresetemail(_authController.email.toString());
+                  // _authController
+                  //     .sendpasswordresetemail(_authController.email.toString());
+                  Get.to(()=>ResertScreen());
                 },
                 child: Text(
                   'Forgot Password',
@@ -86,14 +89,14 @@ class SigninPage extends StatelessWidget {
                 ),
               ),
               // IconButton(onPressed: (){}, icon: Icon(Icons))
-              RawMaterialButton(
-                onPressed: () {},
-                elevation: 2.0,
-                fillColor: Colors.white,
-                child: Image.asset("images\gogl.jpg"),
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(),
-              )
+              // RawMaterialButton(
+              //   onPressed: () {},
+              //   elevation: 2.0,
+              //   fillColor: Colors.white,
+              //   child: Image.asset("Assets/Images/gogl.jpg",height: 15,),
+              //   padding: EdgeInsets.all(15.0),
+              //   shape: CircleBorder(),
+              // )
             ],
           ),
         ),

@@ -160,6 +160,7 @@ class AuthController extends GetxController {
       });
     } catch (e) {
       debugPrint(e.toString());
+      dismissLoadingWidget();
       Get.snackbar("Sign In Failed", "Try again");
     }
   }
