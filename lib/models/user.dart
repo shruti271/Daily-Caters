@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
@@ -7,12 +5,12 @@ class UserModel {
   static const NAME = "name";
   static const EMAIL = "email";
 
-  String? id;
-  String? name;
-  String? email;
-  String? password;
-  String? selectedcountry;
-  String? selectedstate;
+  String id;
+  String name;
+  String email;
+  String password;
+  String selectedcountry;
+  String selectedstate;
 
   UserModel({this.id, this.name,this.email});
 

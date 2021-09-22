@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0" # sdk: ">=2.12.0 <3.0.0"-a build kryu tyr nu 6 and 2.7.0 e co--work mathi lidhu
 
 dependencies:
   flutter:
@@ -16,17 +16,22 @@ dependencies:
   shared_preferences:
   firebase_core: ^1.5.0  
   firebase_auth: ^3.0.2
-  google_sign_in: ^5.0.7
   # cloud_firestore: ^2.5.0
   cloud_firestore: 
   firebase_storage: ^10.0.2
   # firebase_core: ^1.5.0
-  firebase_analytics: ^8.2.0
+  # firebase_analytics: ^8.2.0
   dotted_border:
   dotted_line: ^3.0.0
   http: ^0.13.3
   image_picker: 
+  flutter_pw_validator: ^1.2.1
+  flutter_svg: 
 
+  # firebase_core: ^0.3.4 
+  # firebase_auth: ^0.8.4+4
+  # cloud_firestore: ^0.9.13+1
+  # firebase_storage:
 
 dev_dependencies:
   flutter_test:

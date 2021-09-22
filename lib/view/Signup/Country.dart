@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 class CityDropDownBar extends StatelessWidget {
      final AuthController _authController = Get.find();
      final  List<String> _locations = ['Australia','Canada', 'New Zealand'];
-     String? abc;
+     String abc;
+     String eroor;
   // const CityDropDownBar({ Key? key }) : super(key: key);
 
   @override
@@ -77,7 +78,7 @@ class CityDropDownBar extends StatelessWidget {
                             // _authController.selecetedstate.value ="";
                             // _authController.selectedLocation.value = newValue!;
                             // if(newValue == 'Australia'){
-                              _authController.getselectCountry(newValue!);
+                              _authController.getselectCountry(newValue);
                                                             
                                 // print(_authController.curstate);
                                 print("??????????????????????????????");
@@ -112,7 +113,7 @@ class CityDropDownBar extends StatelessWidget {
                         value:_authController.userModel.value.selectedstate,         
                       onChanged: (newValue) {
                         
-                          _authController.getselectSate(newValue!);
+                          _authController.getselectSate(newValue);
                         
                       },
                       items: _authController.curstate.map((location) {
@@ -131,10 +132,20 @@ class CityDropDownBar extends StatelessWidget {
                       height: 30,
                     ),
                     //ImagePickerForCategory(),
+                    Text("$eroor",style: TextStyle(color: Colors.red),),
                   MaterialButton(
                     onPressed: () {
-                      _authController.signUp();
-                      print("ohhkk");
+                      if(_authController.userModel.value.selectedcountry!=null && _authController.userModel.value.selectedstate!=null){
+                        _authController.signUp();
+                      }else if(_authController.userModel.value.selectedcountry!=null){
+                        _authController.geterror("country must be selected");
+                      }else if (_authController.userModel.value.selectedstate!=null){
+                        _authController.geterror("city must be selected");
+                      }else{
+                        _authController.geterror("country and city must be selected");                        
+                      }
+                      
+                      // print("ohhkk");
                     },
                     child: Text('Sign Up'),
                     textColor: Color(0xffFFFFFF),

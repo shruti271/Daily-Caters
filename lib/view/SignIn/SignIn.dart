@@ -3,6 +3,7 @@ import 'package:daily_caters/view/Signup/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../size_config.dart';
 import 'ResertPassword.dart';
 
 class SigninPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class SigninPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

@@ -1,14 +1,14 @@
-import 'package:daily_caters/constants/firebase.dart';
 import 'package:daily_caters/controller/signup/auth_controller.dart';
+// import 'package:daily_caters/size_config.dart';
 import 'package:daily_caters/view/Home/body.dart';
 import 'package:daily_caters/view/SignIn/SignIn.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'constants/firebase.dart';
 
 Future<void> main() async {
-  //await Firebase.initializeApp();  
+  // await Firebase.initializeApp();  
   WidgetsFlutterBinding.ensureInitialized();
     await initialization.then((value){
     // Get.put(AppController());
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
   MyApp({this.cuser});
   @override
   Widget build(BuildContext context) {
+    
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(

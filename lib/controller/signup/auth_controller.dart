@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_caters/constants/firebase.dart';
 import 'package:daily_caters/helpers/showLoading.dart';
@@ -6,21 +7,24 @@ import 'package:daily_caters/view/Home/body.dart';
 import 'package:daily_caters/view/SignIn/SignIn.dart';
 import 'package:daily_caters/view/Signup/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 // import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  Rx<User>? firebaseUser;
+  Rx<User> firebaseUser;
   // RxBool isLoggedIn = false.obs;
-  GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+  
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController comfirmpassword = TextEditingController();
   final List<String> locations = ['Australia', 'Canada', 'New Zealand'];
   final List<String> _ausstate = [
     'NSW',
@@ -67,8 +71,11 @@ class AuthController extends GetxController {
   ];
 
   List<String> curstate = [''].obs;
-  var curUser;
+  // var curUser;
   var selecetedstate = ''.obs;
+   var obscurepasswordText= false.obs;
+   var obscureconfirmpasswordText= false.obs;
+   var error= ''.obs;
 
   Rx<UserModel> userModel = UserModel().obs;
 
@@ -87,7 +94,22 @@ class AuthController extends GetxController {
     else if (val == locations[2]) curstate = _nzstate;
     update();
   }
+  void getpasswordvisibility(bool val ){
+    // selectedLocation = value;
+    obscurepasswordText.value = val ;  
+    update();
+    // print(obscureText);
+  }
 
+    void getconfirmpasswordvisibility(bool val ){
+    // selectedLocation = value;
+    obscureconfirmpasswordText.value = val ;
+    // if(obscureText.isTrue){
+    //   obscureText.toggle();
+    // }else
+    update();
+    // print(obscureText);
+  }
   void getselectSate(String val) {
     // selectedLocation = value;
     userModel.value.selectedstate = val;
@@ -115,11 +137,11 @@ class AuthController extends GetxController {
   //     // Get.offAll(() => HomeScreen());
   //   }
   // }
-  @override
-  void onClose() {
-    userModel.close();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   // userModel.close();
+  //   super.onClose();
+  // }
 
   // Future<bool> getRememberUser()  async {
   //     await SharedPreferences.getInstance().then((value) {
@@ -150,7 +172,7 @@ class AuthController extends GetxController {
           .signInWithEmailAndPassword(
               email: email.text.trim(), password: password.text.trim())
           .then((result) {
-        String _userId = result.user!.uid;
+        String _userId = result.user.uid;
         initializeUserModel(_userId);
         print(_userId);
         _rememberUser(_userId);
@@ -170,11 +192,11 @@ class AuthController extends GetxController {
     try {
       print(userModel.value.email);
       print(userModel.value.password);
-      if(auth.isSignInWithEmailLink("https://dailycaters-a8a89.firebaseapp.com/__/auth/action?mode=action&oobCode=code"))
-      {
-        await auth.signInWithEmailLink(email: userModel.value.email ?? "", emailLink: "https://dailycaters-a8a89.firebaseapp.com/__/auth/action?mode=action&oobCode=code").then((value) {
-        print("ohhhhhhhkkkkkkkkkkkkkkjiiiiiii");
-      }) ;}
+      // if(auth.isSignInWithEmailLink("https://dailycaters-a8a89.firebaseapp.com/__/auth/action?mode=action&oobCode=code"))
+      // {
+      //   await auth.signInWithEmailLink(email: userModel.value.email ?? "", emailLink: "https://dailycaters-a8a89.firebaseapp.com/__/auth/action?mode=action&oobCode=code").then((value) {
+      //   print("ohhhhhhhkkkkkkkkkkkkkkjiiiiiii");
+      // }) ;}
        await auth
           .createUserWithEmailAndPassword(
               email: userModel.value.email ?? "",
@@ -183,7 +205,7 @@ class AuthController extends GetxController {
             
         // print(result);
         // print("????????????????");
-        String _userId = result.user!.uid;
+        String _userId = result.user.uid;
         
         _addUserToFirestore(_userId);
         _rememberUser(userModel.value.id.toString());
@@ -214,7 +236,7 @@ class AuthController extends GetxController {
   }
 
   _addUserToFirestore(String userId) {
-    firebaseFirestore.collection("Users").doc(userId).set({
+    FirebaseFirestore.instance.collection("Users").doc(userId).set({
       // "id": userId,
       "UserName": userModel.value.name,
       "password": userModel.value.password,
@@ -292,8 +314,8 @@ class AuthController extends GetxController {
   }
 
   _clearControllers() {
-    name.clear();
-    email.clear();
-    password.clear();
+    // name.clear();
+    // email.clear();
+    // password.clear();
   }
 }
